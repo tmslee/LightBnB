@@ -1,7 +1,10 @@
 $(() => {
   window.propertyListing = {};
   
-  function createListing(property, isReservation) {
+  function createListing(property, isReservation, user) {
+    console.log(user);
+    makeResBtn = user ? `<button>make a reservation</button>`: ``;
+
     return `
     <article class="property-listing">
         <section class="property-listing__preview-image">
@@ -20,6 +23,7 @@ $(() => {
           <footer class="property-listing__footer">
             <div class="property-listing__rating">${Math.round(property.average_rating * 100) / 100}/5 stars</div>
             <div class="property-listing__price">$${property.cost_per_night/100.0}/night</div>
+            ${makeResBtn}
           </footer>
         </section>
       </article>

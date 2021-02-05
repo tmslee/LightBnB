@@ -1,4 +1,6 @@
 $(() => {
+  const user = getMyDetails().then(json => json.user);
+  console.log(`current user is: ${user}`);
 
   const $propertyListings = $(`
   <section class="property-listings" id="property-listings">
@@ -21,7 +23,7 @@ $(() => {
     clearListings();
     for (const propertyId in properties) {
       const property = properties[propertyId];
-      const listing = propertyListing.createListing(property, isReservation);
+      const listing = propertyListing.createListing(property, isReservation, user);
       addListing(listing);
     }
   }

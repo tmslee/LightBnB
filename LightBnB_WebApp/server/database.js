@@ -17,14 +17,18 @@ const pool = new Pool({
  * @param {String} email The email of the user.
  * @return {Promise<{}>} A promise to the user.
  */
+const query = function (queryStr, queryParams) {
+  return pool.query(queryStr, queryParams)
+  .catch(err => console.log(`custom query: ${Error(err)}`));
+}
+
 const getUserWithEmail = function(email) {
-  return pool.query(
+  return query(
   `SELECT *
   FROM users
   WHERE email = $1;`
   , [email])
-  .then(res => res.rows[0])
-  .catch(err => null);
+  .then(res => res.rows[0]);
 }
 exports.getUserWithEmail = getUserWithEmail;
 
